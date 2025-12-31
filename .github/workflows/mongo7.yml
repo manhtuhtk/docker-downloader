@@ -1,0 +1,21 @@
+name: Download Docker Image
+on:
+  workflow_dispatch: # cho phép nhấn nút chạy thủ công
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Pull and Save Docker Image
+        run: |
+          docker pull rootpublic/mongo:7.0-bookworm-slim_rootio
+          docker save rootpublic/mongo:7.0-bookworm-slim_rootio -o mongo7.0.tar
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: mongo7.0-image # tên file khi tải
+          path: mongo7.0.tar
+          retention-days: 1 # tự xóa file sau 1 ngày
+      
+    
