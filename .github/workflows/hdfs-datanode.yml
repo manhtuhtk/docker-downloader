@@ -8,14 +8,14 @@ jobs:
     steps:
       - name: Pull and Save Docker Image
         run: |
-          docker pull provectuslabs/kafka-ui:latest
-          docker save provectuslabs/kafka-ui:latest -o kafka-ui.tar
+          docker pull bde2020/hadoop-datanode:latest
+          docker save bde2020/hadoop-datanode:latest -o hadoop-datanode3.2.1-java8.tar
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: kafka-ui-image # tên file khi tải
-          path: kafka-ui.tar
+          name: hadoop-datanode3.2.1-java8-image # tên file khi tải
+          path: hadoop-datanode3.2.1-java8.tar
           retention-days: 1 # tự xóa file sau 1 ngày
       
     
