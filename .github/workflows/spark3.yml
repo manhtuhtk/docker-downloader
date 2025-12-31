@@ -8,14 +8,14 @@ jobs:
     steps:
       - name: Pull and Save Docker Image
         run: |
-          docker pull provectuslabs/kafka-ui:latest
-          docker save provectuslabs/kafka-ui:latest -o kafka-ui.tar
+          docker pull apache/spark:v3.2.4
+          docker save apache/spark:v3.2.4 -o spark3.2.tar
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: kafka-ui-image # tên file khi tải
-          path: kafka-ui.tar
+          name: spark3.2-image # tên file khi tải
+          path: spark3.2.tar
           retention-days: 1 # tự xóa file sau 1 ngày
       
     
