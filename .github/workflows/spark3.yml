@@ -1,0 +1,21 @@
+name: Download Spark3 Docker Image
+on:
+  workflow_dispatch: # cho phép nhấn nút chạy thủ công
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Pull and Save Docker Image
+        run: |
+          docker pull provectuslabs/kafka-ui:latest
+          docker save provectuslabs/kafka-ui:latest -o kafka-ui.tar
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: kafka-ui-image # tên file khi tải
+          path: kafka-ui.tar
+          retention-days: 1 # tự xóa file sau 1 ngày
+      
+    
