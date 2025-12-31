@@ -1,0 +1,20 @@
+name: Download Docker Image
+on:
+  workflow_dispatch: # cho phép nhấn nút chạy thủ công
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Pull and Save Docker Mailpit (SMTP simulator) Image
+        run: |
+          docker pull axllent/mailpit
+          docker axllent/mailpit -o mailpit.tar
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: mailpit-image # tên file khi tải
+          path: mailpit.tar
+          retention-days: 1 # tự xóa file sau 1 ngày
+      
