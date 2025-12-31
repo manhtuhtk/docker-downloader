@@ -1,4 +1,4 @@
-name: Download Docker Image
+name: Download KafkaUI Docker Image
 on:
   workflow_dispatch: # cho phép nhấn nút chạy thủ công
 
