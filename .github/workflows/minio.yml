@@ -9,7 +9,7 @@ jobs:
       - name: Pull and Save Docker Image
         run: |
           docker pull quay.io/minio/minio:RELEASE.2025-09-07T16-13-09Z-cpuv1
-          docker pull quay.io/minio/minio:RELEASE.2025-09-07T16-13-09Z-cpuv1 -o minio.tar
+          docker save quay.io/minio/minio:RELEASE.2025-09-07T16-13-09Z-cpuv1 -o minio.tar
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
