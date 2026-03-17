@@ -1,0 +1,20 @@
+name: Download Redis Docker Image
+on:
+  workflow_dispatch: # cho phép nhấn nút chạy thủ công
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Pull and Save Docker Image
+        run: |
+          docker pull redis:7
+          docker save redis:7 -o redis.tar
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: redis-image # tên file khi tải
+          path: redis.tar
+          retention-days: 1 # tự xóa file sau 1 ngày
+      
