@@ -8,8 +8,8 @@ jobs:
     steps:
       - name: Pull and Save Docker Image
         run: |
-          docker pull apache/superset:6.0.0rc3-dev
-          docker save apache/superset:6.0.0rc3-dev -o superset.tar
+          docker pull regang/superset:ptdl-6.0.0
+          docker save regang/superset:ptdl-6.0.0 -o superset.tar
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
