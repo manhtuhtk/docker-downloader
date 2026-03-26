@@ -1,0 +1,20 @@
+name: Download Node exporter Docker Image
+on:
+  workflow_dispatch: # cho phép nhấn nút chạy thủ công
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Pull and Save Docker Image
+        run: |
+          docker pull ubuntu/node-exporter:1.9-24.04_stable
+          docker save ubuntu/node-exporter:1.9-24.04_stable -o node-exporter.tar
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: node-exporter-image # tên file khi tải
+          path: node-exporter.tar
+          retention-days: 1 # tự xóa file sau 1 ngày
+      
