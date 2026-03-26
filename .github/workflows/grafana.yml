@@ -1,4 +1,4 @@
-name: Download Bitnami Grafana Docker Image
+name: Download Grafana Docker Image
 on:
   workflow_dispatch: # cho phép nhấn nút chạy thủ công
 
@@ -8,8 +8,8 @@ jobs:
     steps:
       - name: Pull and Save Docker Image
         run: |
-          docker pull bitnami/grafana:latest
-          docker save bitnami/grafana:latest -o grafana.tar
+          docker pull ubuntu/grafana:9.5-24.04_stable
+          docker save ubuntu/grafana:9.5-24.04_stable -o grafana.tar
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
