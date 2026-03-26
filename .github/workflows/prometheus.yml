@@ -1,0 +1,20 @@
+name: Download Bitnami Prometheus Docker Image
+on:
+  workflow_dispatch: # cho phép nhấn nút chạy thủ công
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Pull and Save Docker Image
+        run: |
+          docker pull bitnami/prometheus:latest
+          docker save bitnami/prometheus:latest -o prometheus.tar
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: prometheus-image # tên file khi tải
+          path: prometheus.tar
+          retention-days: 1 # tự xóa file sau 1 ngày
+      
