@@ -1,0 +1,20 @@
+name: Download Clickhouse Docker Image
+on:
+  workflow_dispatch: # cho phép nhấn nút chạy thủ công
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Pull and Save Docker Image
+        run: |
+          docker pull clickhouse/clickhouse-server:25.6.2.5
+          docker save clickhouse/clickhouse-server:25.6.2.5 -o clickhouse-server.tar
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: clickhouse-server-image # tên file khi tải
+          path: clickhouse-server.tar
+          retention-days: 1 # tự xóa file sau 1 ngày
+      
