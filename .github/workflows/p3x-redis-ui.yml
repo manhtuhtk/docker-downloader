@@ -1,0 +1,20 @@
+name: Download P3X Redis UI Docker Image
+on:
+  workflow_dispatch: # cho phép nhấn nút chạy thủ công
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Pull and Save Docker Image
+        run: |
+          docker pull patrikx3/p3x-redis-ui:2026.4.2007
+          docker save patrikx3/p3x-redis-ui:2026.4.2007 -o redisui.tar
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: p3x-redis-ui # tên file khi tải
+          path: redisui.tar
+          retention-days: 1 # tự xóa file sau 1 ngày
+      
