@@ -1,0 +1,19 @@
+name: Download Apereo CAS Docker Image
+on:
+  workflow_dispatch: # cho phép nhấn nút chạy thủ công
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Pull and Save Docker Image
+        run: |
+          docker pull apereo/cas:7.3.7.3
+          docker save apereo/cas:7.3.7.3 -o cas.tar
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: apereo-cas-image # tên file khi tải
+          path: cas.tar
+          retention-days: 1 # tự xóa file sau 1 ngày
