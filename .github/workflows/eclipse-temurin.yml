@@ -1,0 +1,19 @@
+name: Download Eclipse Temurin Docker Image
+on:
+  workflow_dispatch: # cho phép nhấn nút chạy thủ công
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Pull and Save Docker Image
+        run: |
+          docker pull eclipse-temurin:11-jdk
+          docker save eclipse-temurin:11-jdk -o eclipse-temurin.tar
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: eclipsw-temurin-image # tên file khi tải
+          path: eclipse-temurin.tar
+          retention-days: 1 # tự xóa file sau 1 ngày
