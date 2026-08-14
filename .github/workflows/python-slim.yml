@@ -1,0 +1,19 @@
+name: Download Python Slim Docker Image
+on:
+  workflow_dispatch: # cho phép nhấn nút chạy thủ công
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Pull and Save Docker Image
+        run: |
+          docker pull python:3.11-slim
+          docker save python:3.11-slim -o python.tar
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-3.11-slim # tên file khi tải
+          path: python.tar
+          retention-days: 1 # tự xóa file sau 1 ngày
