@@ -1,0 +1,19 @@
+name: Download Phase BE Docker Image
+on:
+  workflow_dispatch: # cho phép nhấn nút chạy thủ công
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Pull and Save Docker Image
+        run: |
+          docker pull phasehq/backend:v2.75.0
+          docker save phasehq/backend:v2.75.0 -o phase.tar
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: phasehq-be-image # tên file khi tải
+          path: phase.tar
+          retention-days: 1 # tự xóa file sau 1 ngày
