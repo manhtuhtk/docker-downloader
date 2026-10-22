@@ -1,0 +1,19 @@
+name: Download Open FGA Docker Image
+on:
+  workflow_dispatch: # cho phép nhấn nút chạy thủ công
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Pull and Save Docker Image
+        run: |
+          docker pull openfga/openfga
+          docker save openfga/openfga -o openfga.tar
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: openfga-image # tên file khi tải
+          path: openfga.tar
+          retention-days: 1 # tự xóa file sau 1 ngày
