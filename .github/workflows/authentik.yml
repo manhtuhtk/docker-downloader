@@ -1,0 +1,19 @@
+name: Download Authentik Server Docker Image
+on:
+  workflow_dispatch: # cho phép nhấn nút chạy thủ công
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Pull and Save Docker Image
+        run: |
+          docker pull authentik/server:2026.5.8
+          docker save authentik/server:2026.5.8 -o authentik.tar
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: authentik-server-image # tên file khi tải
+          path: authentik.tar
+          retention-days: 1 # tự xóa file sau 1 ngày
