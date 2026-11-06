@@ -1,0 +1,19 @@
+name: Download APISIX Docker Image
+on:
+  workflow_dispatch: # cho phép nhấn nút chạy thủ công
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Pull and Save Docker Image
+        run: |
+          docker pull apache/apisix:3.19.0-ubuntu
+          docker save apache/apisix:3.19.0-ubuntu -o apisix.tar
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: apisix-image # tên file khi tải
+          path: apisix.tar
+          retention-days: 1 # tự xóa file sau 1 ngày
